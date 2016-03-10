@@ -325,21 +325,22 @@ def get_new_loske(is_ipp=True):
 
     nextweek_url = ""
     # Second table is IPP, fourth table is FMI
-    table = tables[1] if is_ipp else tables[3]
-    alla = tables[1].findAll('a')
-    if len(alla) < 1:
-        print >>sys.stderr, u"Parse html error"
-        sys.exit(1)
-    nextweek_url = alla[0]['href']
-    if thisweek_url == "":
-        print >>sys.stderr, u"Parse html error"
-        sys.exit(1)
-    
-    pdf = wc.get(loske_base_url+nextweek_url)
-    if pdf == "":
-        print >>sys.stderr, u"Could not download", loske_base_url+nextweek_url
-        sys.exit(1)
-    parse_loske_pdf(pdf, is_ipp)
+    if len(tables) == 4:
+        table = tables[1] if is_ipp else tables[3]
+        alla = table.findAll('a')
+        if len(alla) < 1:
+            print >>sys.stderr, u"Parse html error"
+            sys.exit(1)
+        nextweek_url = alla[0]['href']
+        if thisweek_url == "":
+            print >>sys.stderr, u"Parse html error"
+            sys.exit(1)
+
+        pdf = wc.get(loske_base_url+nextweek_url)
+        if pdf == "":
+            print >>sys.stderr, u"Could not download", loske_base_url+nextweek_url
+            sys.exit(1)
+        parse_loske_pdf(pdf, is_ipp)
 
     config["last_update_ipp"] = datetime.date.today()
 
