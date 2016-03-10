@@ -227,7 +227,7 @@ def parse_loske_pdf(pdf, is_ipp=True):
     bnw_endheuristic_re = re.compile(u"B\.n\.W\.=Beilage.*", re.UNICODE)
     dow_beginheuristic_re = re.compile(u".*?Montag, den ",
                                        re.IGNORECASE | re.UNICODE)
-    meal_detect_re = re.compile(u"(\d\.)(.*?)(\d).(\d\d)", re.UNICODE)
+    meal_detect_re = re.compile(u"(\d\.)(.*?)(\d)\.(\d\d)", re.UNICODE)
     #meal_detect_re = re.compile(u"(\d\.)(\D)", re.UNICODE)
     date_re = re.compile(u"(\d{1,2})\.(\d{1,2})\.(\d{1,4})(.*)", re.UNICODE)
     meal_props = re.compile(ur'\b[VKRS](?:\+[VKRS])*\b\s*', re.UNICODE)
